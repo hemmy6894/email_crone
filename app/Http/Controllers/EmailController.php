@@ -14,12 +14,14 @@ class EmailController extends Controller
 
     public function send(){
         $pending = PendingMailModel::where("state","!=",1)->first();
-        Notification::route('mail', [
-            $pending->to => $pending->to_name,
-        ])->notify(new SendJamaapEmail($pending));
-        $pending->state = 1;
-        $pending->save();
-        print("SENT");
+        if($pending){
+            Notification::route('mail', [
+                $pending->to => $pending->to_name,
+            ])->notify(new SendJamaapEmail($pending));
+            $pending->state = 1;
+            $pending->save();
+            print("SENT");
+        }
     }
 
     public function jamaap()
