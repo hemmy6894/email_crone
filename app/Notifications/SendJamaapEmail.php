@@ -54,7 +54,7 @@ class SendJamaapEmail extends Notification
             if($attach == ""){
                 break;
             }
-            $content = file_get_contents($this->pending->url . urlencode($attach));
+            $content = file_get_contents($this->pending->url . str_replace(" ","%20",$attach));
             $ex = explode("/",$attach);
             if($c = count($ex)){
                 $extension = $ex[$c-1];
