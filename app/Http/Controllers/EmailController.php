@@ -12,9 +12,10 @@ class EmailController extends Controller
 {
     //
 
-    public function send(){
-        $pending = PendingMailModel::where("state","!=",1)->first();
-        if($pending){
+    public function send()
+    {
+        $pendings = PendingMailModel::where("state", "!=", 1)->limit(5)->get();
+        foreach ($pendings as $pending) {
             Notification::route('mail', [
                 $pending->to => $pending->to_name,
             ])->notify(new SendJamaapEmail($pending));
@@ -26,7 +27,7 @@ class EmailController extends Controller
 
     public function jamaap()
     {
-        $response = Http::get(env("LINK_JAMAAP","localhost/").'get_emails');
+        $response = Http::get(env("LINK_JAMAAP", "localhost/") . 'get_emails');
         $bodies = json_decode($response->body());
         foreach ($bodies as $body) {
             PendingMailModel::create([
@@ -43,14 +44,14 @@ class EmailController extends Controller
                 "user" => $body->mail_user,
                 "state" => $body->mail_state,
                 "type" => $body->mail_type,
-                "url" => env("LINK_JAMAAP","localhost/"),
+                "url" => env("LINK_JAMAAP", "localhost/"),
             ]);
         }
     }
 
     public function skyland()
     {
-        $response = Http::get(env("LINK_SKYLAND","localhost/").'get_emails');
+        $response = Http::get(env("LINK_SKYLAND", "localhost/") . 'get_emails');
         $bodies = json_decode($response->body());
         foreach ($bodies as $body) {
             PendingMailModel::create([
@@ -67,7 +68,7 @@ class EmailController extends Controller
                 "user" => $body->mail_user,
                 "state" => $body->mail_state,
                 "type" => "system",
-                "url" => env("LINK_SKYLAND","localhost/"),
+                "url" => env("LINK_SKYLAND", "localhost/"),
             ]);
         }
     }
