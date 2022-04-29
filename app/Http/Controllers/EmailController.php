@@ -24,7 +24,7 @@ class EmailController extends Controller
 
     public function jamaap()
     {
-        $response = Http::get('http://jamaap.grandtracks.com/get_emails');
+        $response = Http::get(env("LINK_JAMAAP","localhost/").'get_emails');
         $bodies = json_decode($response->body());
         foreach ($bodies as $body) {
             PendingMailModel::create([
@@ -41,14 +41,14 @@ class EmailController extends Controller
                 "user" => $body->mail_user,
                 "state" => $body->mail_state,
                 "type" => $body->mail_type,
-                "url" => "http://jamaap.grandtracks.com/",
+                "url" => env("LINK_JAMAAP","localhost/"),
             ]);
         }
     }
 
     public function skyland()
     {
-        $response = Http::get('http://skyland.grandtracks.com/get_emails');
+        $response = Http::get(env("LINK_SKYLAND","localhost/").'get_emails');
         $bodies = json_decode($response->body());
         foreach ($bodies as $body) {
             PendingMailModel::create([
@@ -65,7 +65,7 @@ class EmailController extends Controller
                 "user" => $body->mail_user,
                 "state" => $body->mail_state,
                 "type" => "system",
-                "url" => "http://skyland.grandtracks.com/",
+                "url" => env("LINK_SKYLAND","localhost/"),
             ]);
         }
     }
