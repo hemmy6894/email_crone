@@ -14,7 +14,7 @@ class EmailController extends Controller
 
     public function send()
     {
-        $pendings = PendingMailModel::where("state", "!=", 1)->limit(5)->get();
+        $pendings = PendingMailModel::where("state", "!=", 1)->whereNotNull('to')->limit(5)->get();
         foreach ($pendings as $pending) {
             Notification::route('mail', [
                 $pending->to => $pending->to_name,
