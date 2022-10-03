@@ -10,14 +10,13 @@ class ChartModel extends Model
 {
     use HasFactory;
     protected $table = "jamaap_charts";
-    protected $guard = [];
+    protected $guards = [];
 
     public function scopeAddMail($query, $request)
     {
         $recepients = array_merge($request->ToFull, $request->CcFull, $request->BccFull);
         foreach ($recepients as $recepient) {
             $recepient = json_decode(json_encode($recepient));
-            Log::error("EMail",[$recepient->Email]);
             ChartModel::create([
                 "OriginalMail" => $recepient->Email,
                 "FromName" => $request->FromName,
