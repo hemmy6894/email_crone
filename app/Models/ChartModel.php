@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class ChartModel extends Model
 {
@@ -15,6 +16,7 @@ class ChartModel extends Model
     {
         $recepients = array_merge($request->ToFull, $request->CcFull, $request->BccFull);
         foreach ($recepients as $recepient) {
+            Log::error("EMail",$recepient);
             ChartModel::create([
                 "OriginalMail" => $recepient->Email,
                 "FromName" => $request->FromName,
