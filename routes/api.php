@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Hemmy\SendSms\Controllers\HemmySendSms;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::any("incoming", function(Request $request){
     Log::error("INCOMING",$request->all());
+    $inbound = new \Postmark\Inbound($request->all());
+    HemmySendSms::send("255685639653",$inbound->Subject());
 })->name("incominng_sms");
 
 // 9f674c94b72cd6f424dd50e6ec0739f2@inbound.postmarkapp.com
