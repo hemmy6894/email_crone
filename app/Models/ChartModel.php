@@ -10,7 +10,7 @@ class ChartModel extends Model
 {
     use HasFactory;
     protected $table = "jamaap_charts";
-    protected $guards = [];
+    protected $guarded = [];
 
     public function scopeAddMail($query, $request)
     {
