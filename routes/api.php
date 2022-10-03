@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ChartModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::any("incoming", function(Request $request){
-    Log::error("INCOMING",$request->all());
-    HemmySendSms::send("255685639653",$request->TextBody);
+    ChartModel::addMail($request);
 })->name("incominng_sms");
 
-// 9f674c94b72cd6f424dd50e6ec0739f2@inbound.postmarkapp.com

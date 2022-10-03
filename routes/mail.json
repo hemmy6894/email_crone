@@ -1,0 +1,64 @@
+{
+    "FromName": "Postmarkapp Support",
+    "MessageStream": "inbound",
+    "From": "support@postmarkapp.com",
+    "FromFull": {
+        "Email": "support@postmarkapp.com",
+        "Name": "Postmarkapp Support",
+        "MailboxHash": null
+    },
+    "To": "\"Firstname Lastname\" <mailbox+SampleHash@inbound.postmarkapp.com>",
+    "ToFull": [
+        {
+            "Email": "mailbox+SampleHash@inbound.postmarkapp.com",
+            "Name": "Firstname Lastname",
+            "MailboxHash": "SampleHash"
+        }
+    ],
+    "Cc": "\"First Cc\" <firstcc@postmarkapp.com>, secondCc@postmarkapp.com",
+    "CcFull": [
+        {
+            "Email": "firstcc@postmarkapp.com",
+            "Name": "First Cc",
+            "MailboxHash": null
+        },
+        {
+            "Email": "secondCc@postmarkapp.com",
+            "Name": null,
+            "MailboxHash": null
+        }
+    ],
+    "Bcc": "\"First Bcc\" <firstbcc@postmarkapp.com>",
+    "BccFull": [
+        {
+            "Email": "firstbcc@postmarkapp.com",
+            "Name": "First Bcc",
+            "MailboxHash": null
+        }
+    ],
+    "OriginalRecipient": "mailbox+SampleHash@inbound.postmarkapp.com",
+    "Subject": "Test subject",
+    "MessageID": "00000000-0000-0000-0000-000000000000",
+    "ReplyTo": "replyto@example.com",
+    "MailboxHash": "SampleHash",
+    "Date": "Mon, 3 Oct 2022 12:46:42 -0400",
+    "TextBody": "This is a test text body.",
+    "HtmlBody": "<html><body><p>This is a test html body.</p></body></html>",
+    "StrippedTextReply": "This is the reply text",
+    "RawEmail": "From: Postmarkapp Support <support@postmarkapp.com> To: Firstname Lastname <mailbox+SampleHash@inbound.postmarkapp.com> Subject: Test subject This is a test text body.",
+    "Tag": "TestTag",
+    "Headers": [
+        {
+            "Name": "X-Header-Test",
+            "Value": null
+        }
+    ],
+    "Attachments": [
+        {
+            "Name": "test.txt",
+            "ContentType": "text/plain",
+            "Data": "VGhpcyBpcyBhdHRhY2htZW50IGNvbnRlbnRzLCBiYXNlLTY0IGVuY29kZWQu",
+            "ContentLength": 45
+        }
+    ]
+}
