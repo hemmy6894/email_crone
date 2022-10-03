@@ -38,6 +38,7 @@ return new class extends Migration
             $table->text("Tag")->nullable();
             $table->json("Headers")->nullable();
             $table->json("Attachments")->nullable();
+            $table->string("type")->default("incoming");
             $table->timestamps();
         });
     }

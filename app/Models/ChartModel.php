@@ -12,13 +12,13 @@ class ChartModel extends Model
     protected $table = "jamaap_charts";
     protected $guarded = [];
 
-    public function scopeAddMail($query, $request)
+    public function scopeAddMail($query, $request,$mail = null)
     {
-        $recepients = array_merge($request->ToFull, $request->CcFull, $request->BccFull);
+        $recepients = array_merge([$request->FromFull]);
         foreach ($recepients as $recepient) {
             $recepient = json_decode(json_encode($recepient));
             ChartModel::create([
-                "OriginalMail" => $recepient->Email,
+                "OriginalMail" => $mail ?? $recepient->Email,
                 "FromName" => json_encode($request->FromName),
                 "MessageStream" => json_encode($request->MessageStream),
                 "FromFull" => json_encode($request->FromFull),
