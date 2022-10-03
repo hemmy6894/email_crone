@@ -16,6 +16,7 @@ class ChartModel extends Model
     {
         $recepients = array_merge($request->ToFull, $request->CcFull, $request->BccFull);
         foreach ($recepients as $recepient) {
+            $recepient = json_decode(json_encode($recepient));
             Log::error("EMail",$recepient->Email);
             ChartModel::create([
                 "OriginalMail" => $recepient->Email,
