@@ -82,7 +82,7 @@ class EmailController extends Controller
             "HtmlBody" => null,
             "StrippedTextReply" => null,
             "RawEmail" => null,
-            "Tag" => $body->id,
+            "Tag" => $body->mail_id,
             "Headers" => null,
             "Attachments" => null,
         ]);
