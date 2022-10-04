@@ -9,16 +9,16 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-4 bg-secondary h100">
-            <ul>
+        <div class="col-4 bg-secondary h-100">
+            <ul class="list-group">
                 @foreach($charts as $chart)
-                    <li>
+                    <li class="list-group-item">
                         {{ $chart->OriginalMail }}
                     </li>
                 @endforeach
             </ul>
         </div>
-        <div class="col-8 bg-primary h100"></div>
+        <div class="col-8 bg-primary h-100"></div>
     </div>
 </body>
 </html>
