@@ -12,13 +12,28 @@
         <div class="col-4 bg-secondary h100">
             <ul class="list-group">
                 @foreach($charts as $chart)
-                    <li class="list-group-item">
+                    @php($url = route("single_mail",["mail" => $chart->OriginalMail]))
+                    <li class="list-group-item" onclick="clicked('{{ $url }}')">
                         {{ $chart->OriginalMail }}
                     </li>
                 @endforeach
             </ul>
         </div>
-        <div class="col-8 bg-primary h100"></div>
+        <div class="col-8 bg-primary h100 results"></div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        function clicked(link){
+            $.ajax(
+                {
+                    url : link,
+                    type: 'GET',
+                    success: function(response) {
+                        $(".results").html(response);
+                    }
+                }
+            )
+        }
+    </script>
 </body>
 </html>
