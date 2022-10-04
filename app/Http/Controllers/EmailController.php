@@ -66,7 +66,7 @@ class EmailController extends Controller
                     ";
         }
         $attachs = json_encode($attachs);
-        $mail = json_encode("{
+        $mail = trim("{
             'FromName' : '$body->mail_to_name',
             'MessageStream' : 'outbound',
             'From' :  '$body->mail_from',
@@ -107,6 +107,7 @@ class EmailController extends Controller
             'Attachments' : $attachs
         }
         ");
+        $mail = json_encode($mail);
         Log::error("ERRROR", [$mail]);
         ChartModel::addMail($mail, $body->mail_to);
     }
