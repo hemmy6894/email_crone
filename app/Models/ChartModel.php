@@ -14,7 +14,7 @@ class ChartModel extends Model
 
     public function scopeAddMail($query, $request,$mail = null)
     {
-        $recepients = array_merge([$request->FromFull]);
+        $recepients = array_merge($request->ToFull,$request->CcFull,$request->CcFull);
         foreach ($recepients as $recepient) {
             $recepient = json_decode(json_encode($recepient));
             ChartModel::create([
