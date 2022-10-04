@@ -55,61 +55,37 @@ class EmailController extends Controller
 
     function saveMail($body)
     {
-        $attachs = [];
-        foreach (explode(",", $body->mail_attachment)  as $attach) {
-            if ($attach == "") {
-                break;
-            }
-            $attachs[] = "{
-                        'Name' : $body->url . " . str_replace(" ", "%20", $attach) . "
-                    }
-                    ";
-        }
-        $attachs = json_encode($attachs);
-        $mail = trim("{
-            'FromName' : '$body->mail_to_name',
-            'MessageStream' : 'outbound',
-            'From' :  '$body->mail_from',
-            'FromFull' : {
-                'Email' : '$body->mail_from',
-                'Name' : '$body->mail_from_name',
-                'MailboxHash' : null
-            },
-            'To' : '$body->mail_to_name <$body->mail_to>',
-            'ToFull' : [
-                {
-                    'Email' : '$body->mail_to',
-                    'Name' : '$body->mail_to_name',
-                    'MailboxHash' : null
-                },
-            ],
-            'Cc' : null,
-            'CcFull' : null,
-            'Bcc' : null,
-            'BccFull' : null,
-            'OriginalRecipient' : null,
-            'Subject' : '$body->mail_subject',
-            'MessageID' : '$body->mail_to',
-            'ReplyTo' : 'info@jamaap.co.tz',
-            'MailboxHash' : 'SampleHash',
-            'Date' : '" . Carbon::now()->format("Y-m-d H:i:d") . "',
-            'TextBody' : '$body->mail_body \n $body->mail_template \n $body->mail_signature',
-            'HtmlBody' : '',
-            'StrippedTextReply' :  '$body->mail_body \n $body->mail_template \n $body->mail_signature',
-            'RawEmail' : null,
-            'Tag' :  '',
-            'Headers' :  [
-                {
-                    'Name' : 'X-Header-Test',
-                    'Value' : null
-                }
-            ],
-            'Attachments' : $attachs
-        }
-        ");
-        $mail = json_decode(json_encode($mail));
-        Log::error("ERRROR", [$mail]);
-        ChartModel::addMail($mail, $body->mail_to);
+        ChartModel::create([
+            "OriginalMail" => $mail ?? $body->mail_to,
+            "FromName" => json_encode($body->mail_to_name),
+            "MessageStream" => "outbound",
+            "FromFull" => "$body->mail_from <$body->mail_from_name>",
+            "To" => $body->mail_to,
+            "ToFull" => json_encode("[{
+                'Name' : '$body->mail_to_name',
+                'Email' : '$body->mail_to',
+            }]"),
+            "Cc" => $body->mail_reply_to,
+            "CcFull" => json_encode("[{
+                'Name' : 'JAMAAP',
+                'Email' : '$body->mail_reply_to',
+            }]"),
+            "Bcc" => null,
+            "BccFull" => null,
+            "OriginalRecipient" => $body->mail_to,
+            "Subject" => $body->mail_subject,
+            "MessageID" => $body->mail_to,
+            "ReplyTo" => $body->mail_reply_to,
+            "MailboxHash" => $body->mail_reply_to,
+            "Date" => $body->created_at,
+            "TextBody" => "$body->mail_body \n $body->mail_template \n $body->mail_signature",
+            "HtmlBody" => null,
+            "StrippedTextReply" => null,
+            "RawEmail" => null,
+            "Tag" => $body->id,
+            "Headers" => null,
+            "Attachments" => null,
+        ]);
     }
 
     public function skyland()
