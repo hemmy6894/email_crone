@@ -66,7 +66,7 @@ class EmailController extends Controller
                     ";
         }
         $attachs = json_encode($attachs);
-        $mail = json_encode("
+        $mail = json_encode("{
             'FromName' : '$body->mail_to_name',
             'MessageStream' : 'outbound',
             'From' :  '$body->mail_from',
@@ -104,7 +104,8 @@ class EmailController extends Controller
                     'Value' : null
                 }
             ],
-            'Attachments' : $attachs,
+            'Attachments' : $attachs
+        }
         ");
         $mail = json_decode($mail);
         Log::error("ERRROR", [$mail]);
