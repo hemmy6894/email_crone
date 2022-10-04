@@ -24,3 +24,7 @@ Route::any("incoming", function(Request $request){
     ChartModel::addMail($request);
 })->name("incominng_sms");
 
+Route::any("emails", function(Request $request){
+    return ChartModel::allMail()->get();
+})->name("emails");
+

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ChartModel extends Model
@@ -43,5 +44,13 @@ class ChartModel extends Model
                 "Attachments" => json_encode($request->Attachments),
             ]);
         }
+    }
+
+    public function scopeAllMail($query){
+        return $query->select(DB::raw("count(OriginalMail) as total_mail"),"OriginalMail")->groupBy("OriginalMail")->with("mails");
+    }
+
+    public function mails(){
+        return $this->hasMany(ChartModel::class,"OriginalMail","OriginalMail");
     }
 }
