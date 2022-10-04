@@ -9,7 +9,15 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-4 bg-secondary h100 "></div>
+        <div class="col-4 bg-secondary h100">
+            <ul>
+                @foreach($charts as $chart)
+                    <li>
+                        {{ $chart->OriginalMail }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
         <div class="col-8 bg-primary h100"></div>
     </div>
 </body>
