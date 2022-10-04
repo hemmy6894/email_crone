@@ -55,7 +55,7 @@ class EmailController extends Controller
     function saveMail($body)
     {
         $attachs = [];
-        foreach (explode(",", $body->attachment)  as $attach) {
+        foreach (explode(",", $body->mail_attachment)  as $attach) {
             if ($attach == "") {
                 break;
             }
