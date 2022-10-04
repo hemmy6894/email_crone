@@ -25,6 +25,6 @@ Route::any("incoming", function(Request $request){
 })->name("incominng_sms");
 
 Route::any("emails", function(Request $request){
-    return ChartModel::allMail()->get();
+    return ChartModel::allMail()->paginate(1);
 })->name("emails");
 

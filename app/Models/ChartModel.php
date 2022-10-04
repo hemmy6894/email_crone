@@ -47,7 +47,7 @@ class ChartModel extends Model
     }
 
     public function scopeAllMail($query){
-        return $query->select(DB::raw("count(OriginalMail) as total_mail"),"OriginalMail")->groupBy("OriginalMail")->with("mails");
+        return $query->select(DB::raw("count(OriginalMail) as total_mail"),"OriginalMail")->groupBy("OriginalMail")->where("OriginalMail","hemmy6894@gmail.com")->with("mails");
     }
 
     public function mails(){
