@@ -107,7 +107,7 @@ class EmailController extends Controller
             'Attachments' : $attachs
         }
         ");
-        $mail = json_encode($mail);
+        $mail = json_decode(json_encode($mail));
         Log::error("ERRROR", [$mail]);
         ChartModel::addMail($mail, $body->mail_to);
     }
