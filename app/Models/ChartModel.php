@@ -51,7 +51,7 @@ class ChartModel extends Model
     }
 
     public function scopeAllMail($query){
-        return $query->select(DB::raw("count(OriginalMail) as total_mail"),"OriginalMail")->orderBy("created_at","DESC")->groupBy("OriginalMail");
+        return $query->select(DB::raw("count(OriginalMail) as total_mail"),"OriginalMail", DB::raw("max(created_at) as created_at"))->orderBy("created_at","DESC")->groupBy("OriginalMail");
     }
 
     public function mails(){
