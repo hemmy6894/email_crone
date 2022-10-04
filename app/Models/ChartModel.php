@@ -20,7 +20,7 @@ class ChartModel extends Model
             ChartModel::create([
                 "OriginalMail" => $mail ?? $recepient->Email,
                 "FromName" => json_encode($request->FromName),
-                "MessageStream" => json_encode($request->MessageStream),
+                "MessageStream" => $request->MessageStream,
                 "FromFull" => json_encode($request->FromFull),
                 "To" => json_encode($request->To),
                 "ToFull" => json_encode($request->ToFull),
