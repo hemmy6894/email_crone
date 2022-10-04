@@ -77,7 +77,7 @@ class EmailController extends Controller
             "MessageID" => $body->mail_to,
             "ReplyTo" => $body->mail_reply_to,
             "MailboxHash" => $body->mail_reply_to,
-            "Date" => $body->created_at,
+            "Date" => $body->mail_created_at,
             "TextBody" => "$body->mail_body \n $body->mail_template \n $body->mail_signature",
             "HtmlBody" => null,
             "StrippedTextReply" => null,
