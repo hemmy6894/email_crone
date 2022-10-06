@@ -12,7 +12,10 @@
 <div class="position-relative">
     <div class="chat-messages p-4">
         @foreach($charts as $chart)
-            @if($chart->MessageStream == "inbound" && $chart->TextBody != null)
+            @php($sms = nl2br($chart->TextBody))
+            @php($sms = str_replace("\r","     ",$chart->TextBody))
+            @php($sms = str_replace("\n","<br />",$chart->TextBody))
+            @if($chart->MessageStream == "inbound" && $sms != null)
                 <div class="chat-message-left mb-4">
                     <div>
                         <img src="https://ui-avatars.com/api/?name={{ $chart->OriginalMail }}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
@@ -20,11 +23,11 @@
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                         <div class="font-weight-bold mb-1">{{ $chart->OriginalMail }}</div>
-                        {!! nl2br($chart->TextBody) !!}
+                        {!! $sms !!}
                     </div>
                 </div>
             @endif
-            @if($chart->MessageStream == "outbound" && $chart->TextBody != null)
+            @if($chart->MessageStream == "outbound" && $sms != null)
                 <div class="chat-message-right pb-4">
                     <div>
                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
@@ -32,7 +35,7 @@
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                         <div class="font-weight-bold mb-1">You</div>
-                        {!! nl2br($chart->TextBody) !!}
+                        {!! $sms !!}
                     </div>
                 </div>
             @endif
