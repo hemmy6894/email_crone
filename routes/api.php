@@ -31,6 +31,6 @@ Route::any("emails", function(Request $request){
 
 Route::any("email/{mail}", function(Request $request,$mail){
     $charts = ChartModel::singleMail($mail)->get();
-    return view("chart_single",compact("charts"));
+    return view("chart_single",compact("charts","mail"));
 })->name("single_mail");
 
