@@ -94,9 +94,6 @@
                             </div>
                         </a>
                         @endforeach
-
-
-
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9 results"></div>
