@@ -65,31 +65,30 @@ class EmailController extends Controller
                 "body" => $request->mail_body,
                 "template" => null,
                 "signature" => null,
-                "attachment" => [],
+                "attachment" => null,
                 "user" => 2,
                 "state" => 0,
                 "type" => "system",
                 "url" => env("LINK_JAMAAP", "localhost/"),
             ]
         );
-        return $body;
-        // PendingMailModel::create([
-        //     "to" => $body->mail_to,
-        //     "to_name" => $body->mail_to_name,
-        //     "reply_to" => $body->mail_reply_to,
-        //     "mail_from" => $body->mail_from,
-        //     "from_name" => $body->mail_from_name,
-        //     "subject" => $body->mail_subject,
-        //     "body" => $body->mail_body,
-        //     "template" => $body->mail_template,
-        //     "signature" => $body->mail_signature,
-        //     "attachment" => $body->mail_attachment,
-        //     "user" => $body->mail_user,
-        //     "state" => $body->mail_state,
-        //     "type" => $body->mail_type,
-        //     "url" => env("LINK_JAMAAP", "localhost/"),
-        // ]);
-        // $this->saveMail($body);
+        PendingMailModel::create([
+            "to" => $body->mail_to,
+            "to_name" => $body->mail_to_name,
+            "reply_to" => $body->mail_reply_to,
+            "mail_from" => $body->mail_from,
+            "from_name" => $body->mail_from_name,
+            "subject" => $body->mail_subject,
+            "body" => $body->mail_body,
+            "template" => $body->mail_template,
+            "signature" => $body->mail_signature,
+            "attachment" => $body->mail_attachment,
+            "user" => $body->mail_user,
+            "state" => $body->mail_state,
+            "type" => $body->mail_type,
+            "url" => env("LINK_JAMAAP", "localhost/"),
+        ]);
+        $this->saveMail($body);
     }
 
     function saveMail($body)
