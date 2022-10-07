@@ -108,6 +108,7 @@
                 data: data,
                 success: function(response) {
                     $(".emails").html(response);
+                    $(".first_convo").click();
                 }
             })
         }
