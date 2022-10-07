@@ -60,7 +60,7 @@ class EmailController extends Controller
                 "mail_to_name" => $request->mail_to,
                 "mail_reply_to" => "info@jamaap.co.tz",
                 "mail_from" => "info@jamaap.co.tz",
-                "mail_from_name" => "info@jamaap.co.tz",
+                "mail_from_name" => "Jamaap Co. Ltd",
                 "mail_subject" => "",
                 "mail_body" => $request->mail_body,
                 "template" => null,
