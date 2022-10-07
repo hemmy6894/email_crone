@@ -76,7 +76,7 @@
                         <div class="px-4 d-none d-md-block">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <input type="text" class="form-control my-3" placeholder="Search...">
+                                    <input type="text" class="form-control my-3 searching" placeholder="Search...">
                                 </div>
                             </div>
                         </div>
@@ -100,16 +100,22 @@
             })
         }
 
-        function getEmails() {
+        function getEmails(data = {}) {
             link = "{{ route('mails') }}";
             $.ajax({
                 url: link,
                 type: 'GET',
+                data: data,
                 success: function(response) {
                     $(".emails").html(response);
                 }
             })
         }
+
+        $(".searching").on("input", function(){
+            var search = $(this).val();
+            getEmails({search: search});
+        });
 
         $(document).ready(function(){
             getEmails();

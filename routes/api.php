@@ -29,7 +29,11 @@ Route::any("emails", function(Request $request){
 })->name("emails");
 
 Route::any("mails", function(Request $request){
-    $charts = ChartModel::allMail()->limit(10)->get();
+    $charts = ChartModel::allMail();
+    if($request->search){
+        $charts->where("OriginalMail","like","%".$request->search."%");
+    }
+    $charts = $charts->limit(10)->get();
     return view("mails",compact("charts"));
 })->name("mails");
 
