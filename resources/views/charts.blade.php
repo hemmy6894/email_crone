@@ -91,7 +91,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
         $(document).on("click", ".sendMessage", function() {
-            console.log($(this).siblings(".message").val());
+            var data = {
+                message: $(this).siblings(".message").val(),
+                email: $(this).siblings(".mail").val(),
+            }
+            console.log(data);
         });
     </script>
     <script>
