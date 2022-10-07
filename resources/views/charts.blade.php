@@ -90,23 +90,8 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        $(document).on("click", ".sendMessage", function() {
-            var data = {
-                mail_body: $(this).siblings(".message").val(),
-                mail_to: $(this).siblings(".mail").val(),
-            }
-            $.ajax({
-                url: "{{ route('post-email') }}",
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    $(".class_"+$(this).siblings(".mail").val()).click();
-                }
-            })
-        });
-    </script>
-    <script>
         currentClicked = "";
+
         function clicked(link) {
             currentClicked = link;
             $.ajax({
@@ -117,6 +102,22 @@
                 }
             })
         }
+
+        $(document).on("click", ".sendMessage", function() {
+            var data = {
+                mail_body: $(this).siblings(".message").val(),
+                mail_to: $(this).siblings(".mail").val(),
+            }
+            $.ajax({
+                url: "{{ route('post-email') }}",
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    // $(".class_"+$(this).siblings(".mail").val()).click();
+                    clicked(currentClicked);
+                }
+            })
+        });
 
         function getEmails(data = {}) {
             link = "{{ route('mails') }}";
@@ -140,7 +141,7 @@
 
         $(document).ready(function() {
             getEmails();
-            setInterval(clicked(currentClicked),30000);
+            // setInterval(clicked(currentClicked),30000);
         });
     </script>
 </body>
