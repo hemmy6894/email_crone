@@ -47,9 +47,3 @@
         <button class="btn btn-primary sendMessage">Send</button>
     </div>
 </div>
-
-<script>
-    $(document).on("click",".sendMessage", function(){
-        console.log($(this).siblings(".message").val());
-    });
-</script>

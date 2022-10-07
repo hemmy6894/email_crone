@@ -90,6 +90,11 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
+        $(document).on("click", ".sendMessage", function() {
+            console.log($(this).siblings(".message").val());
+        });
+    </script>
+    <script>
         function clicked(link) {
             $.ajax({
                 url: link,
@@ -113,12 +118,14 @@
             })
         }
 
-        $(".searching").on("input", function(){
+        $(".searching").on("input", function() {
             var search = $(this).val();
-            getEmails({search: search});
+            getEmails({
+                search: search
+            });
         });
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             getEmails();
         });
     </script>
