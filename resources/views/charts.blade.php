@@ -140,7 +140,7 @@
 
         $(document).ready(function() {
             getEmails();
-            setInterval(clicked(currentClicked),15000);
+            setInterval(clicked(currentClicked),30000);
         });
     </script>
 </body>
