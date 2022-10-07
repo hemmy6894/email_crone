@@ -106,7 +106,9 @@
         });
     </script>
     <script>
+        currentClicked = "";
         function clicked(link) {
+            currentClicked = link;
             $.ajax({
                 url: link,
                 type: 'GET',
@@ -138,6 +140,7 @@
 
         $(document).ready(function() {
             getEmails();
+            setInterval(clicked(currentClicked),15000);
         });
     </script>
 </body>
