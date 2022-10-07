@@ -43,7 +43,7 @@
 
 <div class="flex-grow-0 py-3 px-4 border-top">
     <div class="input-group">
-        <textarea type="text" class="form-control" placeholder="Type your message ..." rows="4">
+        <textarea type="text" class="form-control" placeholder="Type your message ..." rows="4"></textarea>
         <button class="btn btn-primary">Send</button>
     </div>
 </div>
