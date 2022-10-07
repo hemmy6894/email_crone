@@ -13,8 +13,6 @@
     <div class="chat-messages p-4">
         @foreach($charts as $chart)
             @php($sms = nl2br($chart->TextBody))
-            @php($sms = str_replace("\\r","    ",$chart->TextBody))
-            @php($sms = str_replace("\\n","<br />",$chart->TextBody))
             @if($chart->MessageStream == "inbound" && $sms != null)
                 <div class="chat-message-left mb-4">
                     <div>
