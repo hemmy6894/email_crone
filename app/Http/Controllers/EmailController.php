@@ -56,19 +56,19 @@ class EmailController extends Controller
     public function createNewMail(Request $request){
         $body = new PendingMailModel(
             [
-                "to" => $request->mail_to,
-                "to_name" => $request->mail_to,
-                "reply_to" => "info@jamaap.co.tz",
+                "mail_to" => $request->mail_to,
+                "mail_to_name" => $request->mail_to,
+                "mail_reply_to" => "info@jamaap.co.tz",
                 "mail_from" => "info@jamaap.co.tz",
-                "from_name" => "info@jamaap.co.tz",
-                "subject" => "",
-                "body" => $request->mail_body,
+                "mail_from_name" => "info@jamaap.co.tz",
+                "mail_subject" => "",
+                "mail_body" => $request->mail_body,
                 "template" => null,
                 "signature" => null,
                 "attachment" => null,
-                "user" => 2,
-                "state" => 0,
-                "type" => "system",
+                "mail_user" => 2,
+                "mail_state" => 0,
+                "mail_type" => "system",
                 "url" => env("LINK_JAMAAP", "localhost/"),
             ]
         );
