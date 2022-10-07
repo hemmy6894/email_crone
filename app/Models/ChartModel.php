@@ -47,7 +47,7 @@ class ChartModel extends Model
     }
 
     public function scopeSingleMail($query,$email){
-        return $query->where("OriginalMail",$email)->oldest();
+        return $query->where("OriginalMail",$email)->whereNotNull("TextBody")->where("TextBody","!=","null")->oldest();
     }
 
     public function scopeAllMail($query){
