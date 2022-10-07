@@ -25,9 +25,13 @@ Route::any("incoming", function(Request $request){
 })->name("incominng_sms");
 
 Route::any("emails", function(Request $request){
-    $charts = ChartModel::allMail()->get();
-    return view("charts",compact("charts"));
+    return view("charts");
 })->name("emails");
+
+Route::any("mails", function(Request $request){
+    $charts = ChartModel::allMail()->limit(10)->get();
+    return view("charts",compact("charts"));
+})->name("mails");
 
 Route::any("email/{mail}", function(Request $request,$mail){
     $charts = ChartModel::singleMail($mail)->get();
