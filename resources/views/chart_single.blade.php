@@ -50,6 +50,6 @@
 
 <script>
     $(document).on("click",".sendMessage", function(){
-        console.log($(".message").val());
+        console.log($(this).sublings());
     });
 </script>
