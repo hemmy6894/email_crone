@@ -92,8 +92,8 @@
     <script>
         $(document).on("click", ".sendMessage", function() {
             var data = {
-                message: $(this).siblings(".message").val(),
-                email: $(this).siblings(".mail").val(),
+                mail_body: $(this).siblings(".message").val(),
+                mail_to: $(this).siblings(".mail").val(),
             }
             $.ajax({
                 url: "{{ route('post-email') }}",
