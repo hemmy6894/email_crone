@@ -30,7 +30,7 @@ Route::any("emails", function(Request $request){
 
 Route::any("mails", function(Request $request){
     $charts = ChartModel::allMail()->limit(10)->get();
-    return view("charts",compact("charts"));
+    return view("mails",compact("charts"));
 })->name("mails");
 
 Route::any("email/{mail}", function(Request $request,$mail){

@@ -106,7 +106,7 @@
                 url: link,
                 type: 'GET',
                 success: function(response) {
-                    $(".results").html(response);
+                    $(".emails").html(response);
                 }
             })
         }
