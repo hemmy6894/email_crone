@@ -53,6 +53,44 @@ class EmailController extends Controller
         }
     }
 
+    public function createNewMail(Request $request){
+        $body = new PendingMailModel(
+            [
+                "to" => $request->mail_to,
+                "to_name" => $request->mail_to_name,
+                "reply_to" => $request->mail_reply_to,
+                "mail_from" => $request->mail_from,
+                "from_name" => $request->mail_from_name,
+                "subject" => $request->mail_subject,
+                "body" => $request->mail_body,
+                "template" => $request->mail_template,
+                "signature" => $request->mail_signature,
+                "attachment" => $request->mail_attachment,
+                "user" => $request->mail_user,
+                "state" => $request->mail_state,
+                "type" => $request->mail_type,
+                "url" => env("LINK_JAMAAP", "localhost/"),
+            ]
+        );
+        PendingMailModel::create([
+            "to" => $body->mail_to,
+            "to_name" => $body->mail_to_name,
+            "reply_to" => $body->mail_reply_to,
+            "mail_from" => $body->mail_from,
+            "from_name" => $body->mail_from_name,
+            "subject" => $body->mail_subject,
+            "body" => $body->mail_body,
+            "template" => $body->mail_template,
+            "signature" => $body->mail_signature,
+            "attachment" => $body->mail_attachment,
+            "user" => $body->mail_user,
+            "state" => $body->mail_state,
+            "type" => $body->mail_type,
+            "url" => env("LINK_JAMAAP", "localhost/"),
+        ]);
+        $this->saveMail($body);
+    }
+
     function saveMail($body)
     {
         ChartModel::create([

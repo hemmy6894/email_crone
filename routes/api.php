@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailController;
 use App\Models\ChartModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -41,4 +42,7 @@ Route::any("email/{mail}", function(Request $request,$mail){
     $charts = ChartModel::singleMail($mail)->get();
     return view("chart_single",compact("charts","mail"));
 })->name("single_mail");
+// 3003111542396
+
+Route::post("new-mail", [EmailController::class,"createNewMail"])->name("post-email");
 
