@@ -95,7 +95,14 @@
                 message: $(this).siblings(".message").val(),
                 email: $(this).siblings(".mail").val(),
             }
-            console.log(data);
+            $.ajax({
+                url: "{{ route('post-email') }}",
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    $(".class_"+$(this).siblings(".mail").val()).click();
+                }
+            })
         });
     </script>
     <script>
