@@ -48,7 +48,7 @@ class SendJamaapEmail extends Notification
             ->cc($this->pending->mail_from, $this->pending->from_name)
             ->cc($this->pending->reply_to, $this->pending->from_name)
             ->bcc('hemmy6894@gmail.com',"Developer Mail")
-            ->replyTo($this->pending->reply_to, $this->pending->from_name);
+            ->replyTo("tanzania@jamaap.co.tz", $this->pending->from_name);
         $i = 1;
         foreach (explode(",", $this->pending->attachment)  as $attach) {
             if($attach == ""){
