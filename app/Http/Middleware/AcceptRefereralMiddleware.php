@@ -21,7 +21,7 @@ class AcceptRefereralMiddleware
         ];
         $ref = $request->headers->get('referer');
         if(!in_array($ref,$accepts)){
-            return ["FAILED"];
+            return response("Failed",404);
         }
         return $next($request);
     }
