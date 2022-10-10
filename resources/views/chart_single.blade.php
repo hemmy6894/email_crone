@@ -22,7 +22,7 @@
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                         <div class="font-weight-bold mb-1">{{ $chart->OriginalMail }}</div>
-                        <h3>{!! $chart->Subject !!}</h3>
+                        <h5>{!! $chart->Subject !!}</h5>
                         {!! $sms !!}
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                         <div class="font-weight-bold mb-1">You</div>
-                        <h3>{!! $chart->Subject !!} </h3>
+                        <h5>{!! $chart->Subject !!} </h5>
                         {!! $sms !!}
                     </div>
                 </div>
