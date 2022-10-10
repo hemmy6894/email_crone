@@ -27,7 +27,7 @@ Route::any("incoming", function(Request $request){
 
 Route::any("emails", function(Request $request){
     return view("charts");
-})->name("emails");
+})->middleware("referer")->name("emails");
 
 Route::any("mails", function(Request $request){
     $charts = ChartModel::allMail();
@@ -41,7 +41,7 @@ Route::any("mails", function(Request $request){
 Route::any("email/{mail}", function(Request $request,$mail){
     $charts = ChartModel::singleMail($mail)->get();
     return view("chart_single",compact("charts","mail"));
-})->name("single_mail");
+})->middleware("referer")->name("single_mail");
 
-Route::post("new-mail", [EmailController::class,"createNewMail"])->name("post-email");
+Route::post("new-mail", [EmailController::class,"createNewMail"])->middleware("referer")->name("post-email");
 
