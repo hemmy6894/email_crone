@@ -36,7 +36,7 @@ Route::any("mails", function(Request $request){
     }
     $charts = $charts->limit(10)->get();
     return view("mails",compact("charts"));
-})->name("mails");
+})->middleware("referer")->name("mails");
 
 Route::any("email/{mail}", function(Request $request,$mail){
     $charts = ChartModel::singleMail($mail)->get();
