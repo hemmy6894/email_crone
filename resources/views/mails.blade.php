@@ -7,7 +7,7 @@
             <!-- <div class="badge bg-success float-right">{{ $chart->total_mail }}</div> -->
             <div class="d-flex align-items-start">
                 <img src="https://ui-avatars.com/api/?name={{ $chart->OriginalMail }}" class="rounded-circle" alt="Vanessa Tucker" width="40" height="40">
-                <div class="flex-grow-1 ml-3">
+                <div class="flex-grow-1">
                    &nbsp;{{ $chart->OriginalMail }}
                     <!-- <div class="small"><span class="fas fa-circle chat-online"></span> Online</div> -->
                 </div>
