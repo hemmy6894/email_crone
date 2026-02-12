@@ -61,6 +61,7 @@ class EmailController extends Controller
 
         if (! $response->successful()) {
             logger()->error('JAMAAP API failed', [
+                'link' => $response->link(),
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
@@ -204,6 +205,7 @@ class EmailController extends Controller
 
         if (! $response->successful()) {
             logger()->error('SAF API failed', [
+                'link' => $response->link(),
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
