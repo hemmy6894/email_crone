@@ -44,6 +44,15 @@ return [
             'timeout' => null,
         ],
 
+        'backup' => [
+            'transport' => 'smtp',
+            'host' => env('MAIL_HOST'),
+            'port' => env('MAIL_PORT'),
+            'username' => env('MAIL_BACKUP_USERNAME'),
+            'password' => env('MAIL_BACKUP_PASSWORD'),
+            'encryption' => env('MAIL_ENCRYPTION'),
+        ],
+
         'ses' => [
             'transport' => 'ses',
         ],

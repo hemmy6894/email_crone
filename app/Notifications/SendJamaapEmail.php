@@ -2,25 +2,28 @@
 
 namespace App\Notifications;
 
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 
-class SendJamaapEmail extends Notification
+class SendJamaapEmail extends Notification implements ShouldQueue
 {
     use Queueable;
-
     /**
      * Create a new notification instance.
      *
      * @return void
      */
     public $pending;
-    public function __construct($pending = null)
+    public $sender;
+    public function __construct($pending = null, $sender = "smtp")
     {
         //
         $this->pending = $pending;
+        $this->sender = $sender;
     }
 
     /**
@@ -43,21 +46,22 @@ class SendJamaapEmail extends Notification
     public function toMail($notifiable)
     {
         $message =  (new MailMessage)
+            ->mailer($this->sender)
             ->subject($this->pending->subject)
             ->from($this->pending->mail_from, $this->pending->from_name)
             ->cc($this->pending->mail_from, $this->pending->from_name)
             ->cc($this->pending->reply_to, $this->pending->from_name)
-            ->bcc('hemmy6894@gmail.com',"Developer Mail")
+            ->bcc('hemmy6894@gmail.com', "Developer Mail")
             ->replyTo("tanzania@jamaap.co.tz", $this->pending->from_name);
         $i = 1;
         foreach (explode(",", $this->pending->attachment)  as $attach) {
-            if($attach == ""){
+            if ($attach == "") {
                 break;
             }
-            $content = file_get_contents($this->pending->url . str_replace(" ","%20",$attach));
-            $ex = explode("/",$attach);
-            if($c = count($ex)){
-                $extension = $ex[$c-1];
+            $content = file_get_contents($this->pending->url . str_replace(" ", "%20", $attach));
+            $ex = explode("/", $attach);
+            if ($c = count($ex)) {
+                $extension = $ex[$c - 1];
             }
             $message->attachData($content, "$extension");
             $i++;
@@ -80,5 +84,16 @@ class SendJamaapEmail extends Notification
         return [
             //
         ];
+    }
+
+    public function failed(\Throwable $exception)
+    {
+        try {
+            FacadesNotification::route('mail', [
+                $this->pending->to => $this->pending->to_name,
+            ])->notify(new SendJamaapEmail($this->pending, 'backup'));
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }
