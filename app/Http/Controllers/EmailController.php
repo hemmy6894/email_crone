@@ -55,19 +55,18 @@ class EmailController extends Controller
 
     public function jamaap()
     {
-        $response = Http::get(
-            rtrim(env('LINK_JAMAAP', 'http://localhost/'), '/') . '/get_emails'
-        );
-
+        $url = rtrim(env('LINK_JAMAAP', 'http://localhost/'), '/') . '/get_emails';
+        $response = Http::get($url);
         if (! $response->successful()) {
             logger()->error('JAMAAP API failed', [
-                'link' => $response->link(),
+                'link' => $url,
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
             return;
-        }else{
-            logger()->error('SAF API failed', [
+        } else {
+            logger()->error('JAMAAP API failed', [
+                'link' => $url,
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
@@ -199,19 +198,18 @@ class EmailController extends Controller
 
     public function skyland()
     {
-        $response = Http::get(
-            rtrim(env('LINK_SKYLAND', 'http://localhost/'), '/') . '/get_emails'
-        );
-
+        $url = rtrim(env('LINK_SKYLAND', 'http://localhost/'), '/') . '/get_emails';
+        $response = Http::get($url);
         if (! $response->successful()) {
             logger()->error('SAF API failed', [
-                'link' => $response->link(),
+                'link' => $url,
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
             return;
-        }else{
+        } else {
             logger()->error('SAF API failed', [
+                'link' => $url,
                 'status' => $response->status(),
                 'body'   => $response->body(),
             ]);
