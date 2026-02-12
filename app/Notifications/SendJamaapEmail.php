@@ -89,6 +89,7 @@ class SendJamaapEmail extends Notification implements ShouldQueue
     public function failed(\Throwable $exception)
     {
         try {
+            logger()->error('RETRY: SENDING');
             FacadesNotification::route('mail', [
                 $this->pending->to => $this->pending->to_name,
             ])->notify(new SendJamaapEmail($this->pending, 'backup'));
