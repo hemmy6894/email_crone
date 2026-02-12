@@ -30,7 +30,7 @@ class EmailController extends Controller
 
     // public function jamaap()
     // {
-    //     $response = Http::get(env("LINK_JAMAAP", "localhost/") . 'get_emails');
+    //     $response = Http::get(env("LINK_JAMAAP", "https://jamaap.grandtracks.com/") . 'get_emails');
     //     $bodies = json_decode($response->body());
     //     foreach ($bodies as $body) {
     //         PendingMailModel::create([
@@ -47,7 +47,7 @@ class EmailController extends Controller
     //             "user" => $body->mail_user,
     //             "state" => $body->mail_state,
     //             "type" => $body->mail_type,
-    //             "url" => env("LINK_JAMAAP", "localhost/"),
+    //             "url" => env("LINK_JAMAAP", "https://jamaap.grandtracks.com/"),
     //         ]);
     //         $this->saveMail($body);
     //     }
@@ -55,7 +55,7 @@ class EmailController extends Controller
 
     public function jamaap()
     {
-        $url = rtrim(env('LINK_JAMAAP', 'http://localhost/'), '/') . '/get_emails';
+        $url = rtrim(env('LINK_JAMAAP', 'https://jamaap.grandtracks.com/'), '/') . '/get_emails';
         $response = Http::get($url);
         if (! $response->successful()) {
             logger()->error('JAMAAP API failed', [
@@ -96,7 +96,7 @@ class EmailController extends Controller
                 'user'       => $body['mail_user'] ?? null,
                 'state'      => $body['mail_state'] ?? null,
                 'type'       => $body['mail_type'] ?? null,
-                'url'        => env('LINK_JAMAAP', 'http://localhost/'),
+                'url'        => env('LINK_JAMAAP', 'https://jamaap.grandtracks.com/'),
             ]);
 
             $this->saveMail((object) $body);
@@ -121,7 +121,7 @@ class EmailController extends Controller
                 "mail_user" => 2,
                 "mail_state" => 0,
                 "mail_type" => "system",
-                "url" => env("LINK_JAMAAP", "localhost/"),
+                "url" => env("LINK_JAMAAP", "https://jamaap.grandtracks.com/"),
             ]
         );
         PendingMailModel::create([
@@ -138,7 +138,7 @@ class EmailController extends Controller
             "user" => $body->mail_user,
             "state" => $body->mail_state,
             "type" => $body->mail_type,
-            "url" => env("LINK_JAMAAP", "localhost/"),
+            "url" => env("LINK_JAMAAP", "https://jamaap.grandtracks.com/"),
         ]);
         $this->saveMail($body);
     }
@@ -174,7 +174,7 @@ class EmailController extends Controller
 
     // public function skyland()
     // {
-    //     $response = Http::get(env("LINK_SKYLAND", "localhost/") . 'get_emails');
+    //     $response = Http::get(env("LINK_SKYLAND", "https://skyland.grandtracks.com/") . 'get_emails');
     //     $bodies = json_decode($response->body());
     //     foreach ($bodies as $body) {
     //         PendingMailModel::create([
@@ -191,14 +191,14 @@ class EmailController extends Controller
     //             "user" => $body->mail_user,
     //             "state" => $body->mail_state,
     //             "type" => "system",
-    //             "url" => env("LINK_SKYLAND", "localhost/"),
+    //             "url" => env("LINK_SKYLAND", "https://skyland.grandtracks.com/"),
     //         ]);
     //     }
     // }
 
     public function skyland()
     {
-        $url = rtrim(env('LINK_SKYLAND', 'http://localhost/'), '/') . '/get_emails';
+        $url = rtrim(env('LINK_SKYLAND', 'https://skyland.grandtracks.com/'), '/') . '/get_emails';
         $response = Http::get($url);
         if (! $response->successful()) {
             logger()->error('SAF API failed', [
@@ -239,7 +239,7 @@ class EmailController extends Controller
                 'user'       => $body['mail_user'] ?? null,
                 'state'      => $body['mail_state'] ?? null,
                 'type'       => $body['mail_type'] ?? null,
-                'url'        => env('LINK_SKYLAND', 'http://localhost/'),
+                'url'        => env('LINK_SKYLAND', 'https://skyland.grandtracks.com/'),
             ]);
 
             $this->saveMail((object) $body);
