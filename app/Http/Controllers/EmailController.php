@@ -65,6 +65,11 @@ class EmailController extends Controller
                 'body'   => $response->body(),
             ]);
             return;
+        }else{
+            logger()->error('SAF API failed', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
         }
 
         $bodies = $response->json();
@@ -203,6 +208,11 @@ class EmailController extends Controller
                 'body'   => $response->body(),
             ]);
             return;
+        }else{
+            logger()->error('SAF API failed', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
         }
 
         $bodies = $response->json();
