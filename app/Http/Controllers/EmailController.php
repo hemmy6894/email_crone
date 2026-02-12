@@ -28,32 +28,79 @@ class EmailController extends Controller
         }
     }
 
+    // public function jamaap()
+    // {
+    //     $response = Http::get(env("LINK_JAMAAP", "localhost/") . 'get_emails');
+    //     $bodies = json_decode($response->body());
+    //     foreach ($bodies as $body) {
+    //         PendingMailModel::create([
+    //             "to" => $body->mail_to,
+    //             "to_name" => $body->mail_to_name,
+    //             "reply_to" => $body->mail_reply_to,
+    //             "mail_from" => $body->mail_from,
+    //             "from_name" => $body->mail_from_name,
+    //             "subject" => $body->mail_subject,
+    //             "body" => $body->mail_body,
+    //             "template" => $body->mail_template,
+    //             "signature" => $body->mail_signature,
+    //             "attachment" => $body->mail_attachment,
+    //             "user" => $body->mail_user,
+    //             "state" => $body->mail_state,
+    //             "type" => $body->mail_type,
+    //             "url" => env("LINK_JAMAAP", "localhost/"),
+    //         ]);
+    //         $this->saveMail($body);
+    //     }
+    // }
+
     public function jamaap()
     {
-        $response = Http::get(env("LINK_JAMAAP", "localhost/") . 'get_emails');
-        $bodies = json_decode($response->body());
+        $response = Http::get(
+            rtrim(env('LINK_JAMAAP', 'http://localhost/'), '/') . '/get_emails'
+        );
+
+        if (! $response->successful()) {
+            logger()->error('JAMAAP API failed', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
+            return;
+        }
+
+        $bodies = $response->json();
+
+        if (! is_array($bodies)) {
+            logger()->error('Invalid JAMAAP response format', [
+                'response' => $response->body(),
+            ]);
+            return;
+        }
+
         foreach ($bodies as $body) {
             PendingMailModel::create([
-                "to" => $body->mail_to,
-                "to_name" => $body->mail_to_name,
-                "reply_to" => $body->mail_reply_to,
-                "mail_from" => $body->mail_from,
-                "from_name" => $body->mail_from_name,
-                "subject" => $body->mail_subject,
-                "body" => $body->mail_body,
-                "template" => $body->mail_template,
-                "signature" => $body->mail_signature,
-                "attachment" => $body->mail_attachment,
-                "user" => $body->mail_user,
-                "state" => $body->mail_state,
-                "type" => $body->mail_type,
-                "url" => env("LINK_JAMAAP", "localhost/"),
+                'to'         => $body['mail_to'] ?? null,
+                'to_name'    => $body['mail_to_name'] ?? null,
+                'reply_to'   => $body['mail_reply_to'] ?? null,
+                'mail_from'  => $body['mail_from'] ?? null,
+                'from_name'  => $body['mail_from_name'] ?? null,
+                'subject'    => $body['mail_subject'] ?? null,
+                'body'       => $body['mail_body'] ?? null,
+                'template'   => $body['mail_template'] ?? null,
+                'signature'  => $body['mail_signature'] ?? null,
+                'attachment' => $body['mail_attachment'] ?? null,
+                'user'       => $body['mail_user'] ?? null,
+                'state'      => $body['mail_state'] ?? null,
+                'type'       => $body['mail_type'] ?? null,
+                'url'        => env('LINK_JAMAAP', 'http://localhost/'),
             ]);
-            $this->saveMail($body);
+
+            $this->saveMail((object) $body);
         }
     }
 
-    public function createNewMail(Request $request){
+
+    public function createNewMail(Request $request)
+    {
         $body = new PendingMailModel(
             [
                 "mail_to" => $request->mail_to,
@@ -120,27 +167,72 @@ class EmailController extends Controller
         ]);
     }
 
+    // public function skyland()
+    // {
+    //     $response = Http::get(env("LINK_SKYLAND", "localhost/") . 'get_emails');
+    //     $bodies = json_decode($response->body());
+    //     foreach ($bodies as $body) {
+    //         PendingMailModel::create([
+    //             "to" => $body->mail_to,
+    //             "to_name" => $body->mail_to_name,
+    //             "reply_to" => $body->mail_reply_to,
+    //             "mail_from" => $body->mail_from,
+    //             "from_name" => $body->mail_from_name,
+    //             "subject" => $body->mail_subject,
+    //             "body" => $body->mail_body,
+    //             "template" => $body->mail_template,
+    //             "signature" => $body->mail_signature,
+    //             "attachment" => $body->mail_attachment,
+    //             "user" => $body->mail_user,
+    //             "state" => $body->mail_state,
+    //             "type" => "system",
+    //             "url" => env("LINK_SKYLAND", "localhost/"),
+    //         ]);
+    //     }
+    // }
+
     public function skyland()
     {
-        $response = Http::get(env("LINK_SKYLAND", "localhost/") . 'get_emails');
-        $bodies = json_decode($response->body());
+        $response = Http::get(
+            rtrim(env('LINK_SKYLAND', 'http://localhost/'), '/') . '/get_emails'
+        );
+
+        if (! $response->successful()) {
+            logger()->error('SAF API failed', [
+                'status' => $response->status(),
+                'body'   => $response->body(),
+            ]);
+            return;
+        }
+
+        $bodies = $response->json();
+
+        if (! is_array($bodies)) {
+            logger()->error('Invalid JAMAAP response format', [
+                'response' => $response->body(),
+            ]);
+            return;
+        }
+
         foreach ($bodies as $body) {
             PendingMailModel::create([
-                "to" => $body->mail_to,
-                "to_name" => $body->mail_to_name,
-                "reply_to" => $body->mail_reply_to,
-                "mail_from" => $body->mail_from,
-                "from_name" => $body->mail_from_name,
-                "subject" => $body->mail_subject,
-                "body" => $body->mail_body,
-                "template" => $body->mail_template,
-                "signature" => $body->mail_signature,
-                "attachment" => $body->mail_attachment,
-                "user" => $body->mail_user,
-                "state" => $body->mail_state,
-                "type" => "system",
-                "url" => env("LINK_SKYLAND", "localhost/"),
+                'to'         => $body['mail_to'] ?? null,
+                'to_name'    => $body['mail_to_name'] ?? null,
+                'reply_to'   => $body['mail_reply_to'] ?? null,
+                'mail_from'  => $body['mail_from'] ?? null,
+                'from_name'  => $body['mail_from_name'] ?? null,
+                'subject'    => $body['mail_subject'] ?? null,
+                'body'       => $body['mail_body'] ?? null,
+                'template'   => $body['mail_template'] ?? null,
+                'signature'  => $body['mail_signature'] ?? null,
+                'attachment' => $body['mail_attachment'] ?? null,
+                'user'       => $body['mail_user'] ?? null,
+                'state'      => $body['mail_state'] ?? null,
+                'type'       => $body['mail_type'] ?? null,
+                'url'        => env('LINK_SKYLAND', 'http://localhost/'),
             ]);
+
+            $this->saveMail((object) $body);
         }
     }
 }
