@@ -19,7 +19,7 @@ class SendJamaapEmail extends Notification implements ShouldQueue
      */
     public $pending;
     public $sender;
-    public function __construct($pending = null, $sender = "smtp")
+    public function __construct($pending = null, $sender = "mailgun")
     {
         //
         $this->pending = $pending;
