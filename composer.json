@@ -11,9 +11,7 @@
         "jjaffeux/postmark-inbound-php": "^3.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7",
-        "symfony/mailer": "^6.1.5",
-        "symfony/mailgun-mailer": "6.4.24"
+        "laravel/tinker": "^2.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
