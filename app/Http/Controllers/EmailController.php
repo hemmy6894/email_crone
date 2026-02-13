@@ -25,6 +25,7 @@ class EmailController extends Controller
             $pending->state = 1;
             $pending->save();
             print("SENT");
+            logger()->error('EMAIL SENT');
         }
     }
 
